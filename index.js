@@ -14,7 +14,7 @@ client.on('message', message => {
 
     // Commands with no prefix.
     if (message.content.search('xis') != -1) {
-        message.reply('oi xuxu novamente');
+        message.reply('oi xuxu');
     }
 
     // Commands with prefix
