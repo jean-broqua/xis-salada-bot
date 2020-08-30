@@ -11,7 +11,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-    if(message.content.startsWith(prefix) || message.author.bot) return;
+    if(!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
@@ -20,14 +20,16 @@ client.on('message', message => {
         message.reply('oi xuxu novamente');
     }
 
+    // Converte um valor em reais para xis.
     if(command === 'converter') {
         const amount= parseFloat(args[0]) / xisCotation;
 
         if (!isNaN(amount)) {
             message.channel.send('R$ ' + args[0] + ' = ' + 'X$' + amount.toFixed(2));
         }
-    } else if(command == '') {
-        
+    } else if(command == 'fome') {
+
+        message.channel.send({ files: ["https://i.imgur.com/CJj9pHh.jpg"] });
     }
 });
 
