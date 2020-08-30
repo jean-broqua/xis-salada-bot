@@ -11,14 +11,17 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
+
+    // Commands with no prefix.
+    if (message.content.search('xis') != -1) {
+        message.reply('oi xuxu novamente');
+    }
+
+    // Commands with prefix
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
-
-    if(message.content.search('xis') != -1) {
-        message.reply('oi xuxu novamente');
-    }
 
     // Converte um valor em reais para xis.
     if(command === 'converter') {
