@@ -17,7 +17,7 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
 
     if(message.content.search('xis') != -1) {
-        message.reply('oi');
+        message.reply('oi xuxu');
     }
 
     if(command === 'converter') {
