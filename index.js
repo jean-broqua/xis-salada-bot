@@ -45,7 +45,7 @@ client.on('message', message => {
             // Play the audio on the voice channel
             
             voiceChannel.join().then(connection => {
-                const dispatcher = connection.play('jingle.mp3');
+                const dispatcher = connection.play('https://www.youtube.com/watch?v=LvHII0NvHC8');
                 dispatcher.on("end", end => {
                     voiceChannel.leave();
                 });
