@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
+const sodium = require('libsodium-wrappers');
+const opus = require('opusscript');
 
 const client = new Discord.Client();
 
@@ -33,6 +35,22 @@ client.on('message', message => {
     } else if(command == 'fome') {
 
         message.channel.send({ files: ["https://i.imgur.com/CJj9pHh.jpg"] });
+    } else if(command == 'jingle') {
+        if(message.member.voice.channel) {
+            var voiceChannel = message.member.voice.channel;
+            
+            // Send logo image in the chat
+            message.channel.send({ files: ["./images/logo.png"] });
+            
+            // Play the audio on the voice channel
+            
+            voiceChannel.join().then(connection => {
+                const dispatcher = connection.play('./audio/jingle.mp3');
+                dispatcher.on("end", end => {
+                    voiceChannel.leave();
+                });
+            }).catch(err => console.log(err));
+        }
     }
 });
 
