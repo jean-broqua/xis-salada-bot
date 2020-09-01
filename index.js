@@ -38,14 +38,14 @@ client.on('message', message => {
     } else if(command == 'jingle') {
         if(message.member.voice.channel) {
             var voiceChannel = message.member.voice.channel;
-            
+
             // Send logo image in the chat
             message.channel.send({ files: ["./images/logo.png"] });
             
             // Play the audio on the voice channel
             
             voiceChannel.join().then(connection => {
-                const dispatcher = connection.play('./audio/jingle.mp3');
+                const dispatcher = connection.play('jingle.mp3');
                 dispatcher.on("end", end => {
                     voiceChannel.leave();
                 });
