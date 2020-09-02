@@ -1,4 +1,5 @@
 {
     "prefix": "!",
-    "cotation": 15.50
+    "cotation": 15.50,
+    "jigleTimeout": 60000
 }

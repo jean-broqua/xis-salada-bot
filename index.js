@@ -8,6 +8,8 @@ const client = new Discord.Client();
 const xisCotation = config.cotation;
 const prefix = config.prefix;
 
+var startTime;
+
 client.once('ready', () => {
     console.log('Xis Salada in online');
 });
@@ -35,23 +37,43 @@ client.on('message', message => {
     } else if(command == 'fome') {
 
         message.channel.send({ files: ["https://i.imgur.com/CJj9pHh.jpg"] });
-    } else if(command == 'jingle') {
-        if(message.member.voice.channel) {
-            var voiceChannel = message.member.voice.channel;
 
-            // Send logo image in the chat
-            message.channel.send({ files: ["./images/logo.png"] });
-            
-            // Play the audio on the voice channel
-            
-            voiceChannel.join().then(connection => {
-                const dispatcher = connection.play('jingle.mp3');
-                dispatcher.on("end", end => {
-                    voiceChannel.leave();
-                });
-            }).catch(err => console.log(err));
+    } else if(command == 'jingle') {
+
+        // Check if the timeout is comleted
+        if(isJinglePlayable) {
+            if(message.member.voice.channel) {
+                var voiceChannel = message.member.voice.channel;
+                startTime = new Date;
+
+                // Send logo image in the chat
+                message.channel.send({ files: ["./images/logo.png"] });
+                
+                // Play the audio on the voice channel
+                voiceChannel.join().then(connection => {
+                    const dispatcher = connection.play('jingle.mp3');
+
+                    // Exite voice channel of the song is played
+                    setTimeout(() => {
+                        voiceChannel.leave();
+                    }, 30000);
+
+                }).catch(err => console.log(err));
+            }
+        } else {
+            channel.message.reply("Pessoas andam me sabotando (Guilherme). Por isso to com um delay para tocar o maravilhoso jingle.")
         }
+
     }
 });
+
+function isJinglePlayable() {
+    let endTime = new Date;
+    if (startTime - endTime < config.jigleTimeout) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 client.login(process.env.TOKEN);
