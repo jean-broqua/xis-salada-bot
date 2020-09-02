@@ -69,7 +69,7 @@ client.on('message', message => {
 
 function isJinglePlayable() {
     let endTime = new Date;
-    if (startTime - endTime > config.jigleTimeout) {
+    if (endtime - startTime > config.jigleTimeout) {
         return true;
     } else {
         return false;
