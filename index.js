@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const sodium = require('libsodium-wrappers');
 const opus = require('opusscript');
+const env = require('dotenv').config();
 
 const client = new Discord.Client();
 
@@ -40,7 +41,7 @@ client.on('message', message => {
 
     } else if(command == 'jingle') {
 
-        // Check if the timeout is comleted
+        // Check if the timeout is completed
         if(isJinglePlayable) {
             if(message.member.voice.channel) {
                 var voiceChannel = message.member.voice.channel;
@@ -67,9 +68,11 @@ client.on('message', message => {
     }
 });
 
+// to be fixed
 function isJinglePlayable() {
     let endTime = new Date;
-    if (endtime - startTime > config.jigleTimeout) {
+    console.log(endTime - startTime);
+    if (endTime - startTime < config.jigleTimeout) {
         return true;
     } else {
         return false;
