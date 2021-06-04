@@ -12,14 +12,18 @@ const prefix = config.prefix;
 var startTime;
 
 client.once('ready', () => {
-    console.log('Xis Salada in online');
+    console.log('Xis Salada is online');
 });
 
 client.on('message', message => {
 
     // Commands with no prefix.
     if (message.content.search('xis') != -1) {
-        message.reply('oi xuxu');
+        if (message.author.id = "214428539343077386"){
+            message.reply("Não falo com quem faz xis de chocolate.")
+        }else{
+            message.reply('oi xuxu');
+        }
     }
 
     // Commands with prefix
@@ -35,11 +39,15 @@ client.on('message', message => {
         if (!isNaN(amount)) {
             message.channel.send('R$ ' + args[0] + ' = ' + 'X$' + amount.toFixed(2));
         }
-    } else if(command == 'fome') {
+    } else if(command === 'fome') {
 
         message.channel.send({ files: ["https://i.imgur.com/CJj9pHh.jpg"] });
+    
+    }else if (command === 'help'){
+        
+        message.chanel.send('Comandos: !fome, !converter <valor>, !jingle')
 
-    } else if(command == 'jingle') {
+    } else if(command === 'jingle') {
 
         // Check if the timeout is completed
         if(isJinglePlayable) {
@@ -62,7 +70,7 @@ client.on('message', message => {
                 }).catch(err => console.log(err));
             }
         } else {
-            channel.message.reply("Pessoas andam me sabotando (Guilherme). Por isso to com um delay para tocar o maravilhoso jingle.")
+            channel.message.reply("Pessoas andam me sabotando (Supremo). Por isso to com um delay para tocar o maravilhoso jingle.")
         }
 
     }
