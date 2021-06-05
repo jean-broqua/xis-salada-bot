@@ -19,7 +19,7 @@ client.on('message', message => {
 
     // Commands with no prefix.
     if (message.content.search('xis') != -1) {
-        if (message.author.id = "214428539343077386"){
+        if (message.author.id = "214428539343077386" && !message.author.bot){
             message.reply("Não falo com quem faz xis de chocolate.")
         }else{
             message.reply('oi xuxu');
