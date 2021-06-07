@@ -19,8 +19,8 @@ client.on('message', message => {
 
     // Commands with no prefix.
     if (message.content.search('xis') != -1) {
-        if (message.author.id == "214428539343077386" && !message.author.bot){
-            message.reply("Não falo com quem faz xis de chocolate.")
+        if (message.author.id === "282274758907658240" && !message.author.bot){
+            message.channel.send("Não falo com quem faz xis de chocolate.")
         }else{
             message.reply('oi xuxu');
         }
@@ -33,15 +33,19 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
 
     // Converte um valor em reais para xis.
+    if (command === "test") {
+        message.channel.send("heeeya");
+    }
     if(command === 'converter') {
-        const amount= parseFloat(args[0]) / xisCotation;
+        const amount = parseFloat(args[0]) / xisCotation;
 
         if (!isNaN(amount)) {
             message.channel.send('R$ ' + args[0] + ' = ' + 'X$' + amount.toFixed(2));
         }
     } else if(command === 'fome') {
 
-        message.channel.send({ files: ["https://i.imgur.com/CJj9pHh.jpg"] });
+        let xisImg = "xis" + (Math.floor(Math.random() * 4) + 1) + ".png"; 
+        message.channel.send({ files: ["./images/fome_command/" + xisImg] });
     
     }else if (command === 'help'){
         
@@ -62,7 +66,7 @@ client.on('message', message => {
                 voiceChannel.join().then(connection => {
                     const dispatcher = connection.play('jingle.mp3');
 
-                    // Exite voice channel of the song is played
+                    // Exite voice channel after the song is played
                     setTimeout(() => {
                         voiceChannel.leave();
                     }, 30000);
@@ -70,7 +74,7 @@ client.on('message', message => {
                 }).catch(err => console.log(err));
             }
         } else {
-            channel.message.reply("Pessoas andam me sabotando (Supremo). Por isso to com um delay para tocar o maravilhoso jingle.")
+            channel.message.reply("Pessoas andam me sabotando (Supremo). Por isso tenho um delay para tocar o maravilhoso jingle.")
         }
 
     }
