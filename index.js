@@ -1,11 +1,13 @@
+// Requires
 const Discord = require('discord.js');
 const config = require('./config.json');
 const sodium = require('libsodium-wrappers');
 const opus = require('opusscript');
 const env = require('dotenv').config();
+const embeds = require('./embeds.js');
 
+// Definitions
 const client = new Discord.Client();
-
 const xisCotation = config.cotation;
 const prefix = config.prefix;
 
@@ -13,14 +15,19 @@ var startTime;
 
 client.once('ready', () => {
     console.log('Xis Salada is online');
+    client.user.setActivity("!helpx para ver os comandos", {type: "CUSTOM_STATUS"});
 });
 
 client.on('message', message => {
 
     // Commands with no prefix.
     if (message.content.search('xis') != -1) {
-        if (message.author.id === "282274758907658240" && !message.author.bot){
-            message.channel.send("Não falo com quem faz xis de chocolate.")
+        if (message.author.id === "214428539343077386" && !message.author.bot){
+            message.channel.send("Não falo com quem faz xis de chocolate.");
+
+        }else if (message.author.id === "282274758907658240" && !message.author.bot){
+            message.channel.send("Oi mestre.");
+
         }else{
             message.reply('oi xuxu');
         }
@@ -33,9 +40,6 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
 
     // Converte um valor em reais para xis.
-    if (command === "test") {
-        message.channel.send("heeeya");
-    }
     if(command === 'converter') {
         const amount = parseFloat(args[0]) / xisCotation;
 
@@ -44,12 +48,11 @@ client.on('message', message => {
         }
     } else if(command === 'fome') {
 
-        let xisImg = "xis" + (Math.floor(Math.random() * 4) + 1) + ".png"; 
+        let xisImg = "xis" + (Math.floor(Math.random() * 4) + 1) + ".png";
         message.channel.send({ files: ["./images/fome_command/" + xisImg] });
     
-    }else if (command === 'help'){
-        
-        message.chanel.send('Comandos: !fome, !converter <valor>, !jingle')
+    } else if (command === 'helpx'){
+        message.channel.send(embeds.help);
 
     } else if(command === 'jingle') {
 
@@ -76,7 +79,10 @@ client.on('message', message => {
         } else {
             channel.message.reply("Pessoas andam me sabotando (Supremo). Por isso tenho um delay para tocar o maravilhoso jingle.")
         }
-
+    
+    // Check bot status
+    } else if (command === "status") {
+        message.channel.send(`Estou em ${client.guilds.cache.size} servers 👌`);
     }
 });
 
@@ -90,5 +96,6 @@ function isJinglePlayable() {
         return false;
     }
 }
+
 
 client.login(process.env.TOKEN);
