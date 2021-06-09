@@ -9,7 +9,6 @@ const embeds = require('./embeds.js');
 // Definitions
 const client = new Discord.Client();
 const xisCotation = config.cotation;
-const prefix = config.prefix;
 
 var startTime;
 
@@ -34,9 +33,9 @@ client.on('message', message => {
     }
 
     // Commands with prefix
-    if(!message.content.startsWith(prefix) || message.author.bot) return;
+    if(!message.content.startsWith(config.prefix) || message.author.bot) return;
 
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const args = message.content.slice(config.prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
 
     // Converte um valor em reais para xis.
@@ -67,7 +66,7 @@ client.on('message', message => {
                 
                 // Play the audio on the voice channel
                 voiceChannel.join().then(connection => {
-                    const dispatcher = connection.play('jingle.mp3');
+                    const dispatcher = connection.play('./sounds/jingle.mp3');
 
                     // Exite voice channel after the song is played
                     setTimeout(() => {
@@ -96,6 +95,5 @@ function isJinglePlayable() {
         return false;
     }
 }
-
 
 client.login(process.env.TOKEN);
